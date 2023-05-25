@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <script src="./scripts/main.js" defer></script>
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
+    <section class="game_container">
+      <h1 class="page-heading" id="test-heading">Tic Tac Toe</h1>
+      <span id="message-span"></span>
+      <div class="gameboard_and_controls">
+        <div class="gameboard">
+          <div class="gameboard__row">
+            <div class="gameboard__cell" data-game-cell-index="0">.</div>
+            <div class="gameboard__cell" data-game-cell-index="1">.</div>
+            <div class="gameboard__cell" data-game-cell-index="2">.</div>
+          </div>
+          <div class="gameboard__row">
+            <div class="gameboard__cell" data-game-cell-index="3">.</div>
+            <div class="gameboard__cell" data-game-cell-index="4">.</div>
+            <div class="gameboard__cell" data-game-cell-index="5">.</div>
+          </div>
+          <div class="gameboard__row">
+            <div class="gameboard__cell" data-game-cell-index="6">.</div>
+            <div class="gameboard__cell" data-game-cell-index="7">.</div>
+            <div class="gameboard__cell" data-game-cell-index="8">.</div>
+          </div>
+        </div>
+        <div id="control-board">
+          <button id="reset-button">Start Over</button>
+        </div>
+      </div>
+    </section>
+    <a target="_blank" href="https://loicleray.com">
+      <div class="watermark_div">
+        <img
+          src="./assets/loicleray_avatar.png"
+          id="wm_logo"
+          alt="loicleray_avatar"
+        />
+        <p id="wm_text">by Loïc Leray</p>
+      </div>
+    </a>
+  </body>
+</html>
