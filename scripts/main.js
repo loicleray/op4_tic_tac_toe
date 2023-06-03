@@ -151,8 +151,9 @@ function GameLogic(Player1, Player2) {
 
 
 // Create a couple of players
-const person1 = Player('Player 1', 'X');
-const person2 = Player('Player 2', 'O');
+
+const person1 = Player('Player 1', '🤞');
+const person2 = Player('Player 2', '👌');
 
 // Game Display IIFE
 const displayController = (() => {
@@ -163,6 +164,12 @@ const displayController = (() => {
     // DOM elements
     const messageSpanDOM = document.getElementById('message-span');
     const resetButtonDOM = document.getElementById('reset-button');
+    const modifyPlayersButtonDOM = document.getElementById('modify-players-button');
+    // Elements in Dialog
+    const playerDialogDOM = document.getElementById('dialogue-player-info')
+    const closeDialogButtonDOM = document.getElementById('closeDialogButton')
+    const submitDialogButtonDOM = document.getElementById('submitDialogButton')
+
     const gameCells = document.querySelectorAll('.gameboard__cell');
 
     // changes DOM contents (cells and headings) based off gameboard array
@@ -202,21 +209,32 @@ const displayController = (() => {
         updateAllDisplay();
     });
 
+    modifyPlayersButtonDOM.addEventListener("click", (e) => {
+        playerDialogDOM.showModal()
+    });
+
+    closeDialogButtonDOM.addEventListener("click", (e) => {
+        playerDialogDOM.close()
+    });
+
+
     // intitial render
     updateAllDisplay()
 
-    if (gameInstance.getIsGameOver() == false) {
         // game cell functionality (depending of if game isGameOver boolean)
         gameCells.forEach(cell => cell.addEventListener('click', (e) => {
             const cellIndex = e.target.getAttribute('data-game-cell-index');
-            // e.target.classlist.add(`${gameInstance.getCurrentPlayer().getName}`)
-            // console.log(`Cell \'${cellIndex}\' clicked by \'${gameInstance.getCurrentPlayer().getName()}`)
-            gameInstance.makeMove(gameInstance.getCurrentPlayer(), cellIndex);
-            gameInstance.updateGameStatus();
-            updateAllDisplay();
-            }));
-    };
-    if (gameInstance.getIsGameOver()) {
-        alert("Game has ended. Thanks for playing.")
-    };
+            if (gameInstance.getIsGameOver() == false) {
+                // e.target.classlist.add(`${gameInstance.getCurrentPlayer().getName}`)
+                // console.log(`Cell \'${cellIndex}\' clicked by \'${gameInstance.getCurrentPlayer().getName()}`)
+                gameInstance.makeMove(gameInstance.getCurrentPlayer(), cellIndex);
+                gameInstance.updateGameStatus();
+                updateAllDisplay();
+            };
+            if (gameInstance.getIsGameOver()) {
+                alert("Game has ended. Thanks for playing.")
+                // add css class to prevent hover color change of cells
+            };
+        }));
+
 })();

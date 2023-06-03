@@ -1,11 +1,11 @@
 // IMPORTS
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;900&display=swap');
-
 // START RESET
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
+
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -61,10 +61,13 @@ table {
     --thin-font: 200;
     // GLOBAL COLOURS
     --yellow-light: rgb(246, 240, 208);
-    --yellow-medium1: #f1e7b9;
-    --yellow-medium2: #c7be92;
-    --yellow-dark: #cec9aa;
-    --yellow-dark2: #9f9763;
+    --yellow-medium1: rgb(241,231,185);
+    --yellow-medium2: rgb(199,190,146);
+    --yellow-dark: rgb(206,201,170);
+    --yellow-dark2: rgb(159, 151, 99);
+    --red-light: rgb(226, 80, 80);
+    --red-medium: rgb(203, 50, 50);
+    --red-dark: rgb(127, 23, 23);
 }
 
 * {
@@ -75,13 +78,46 @@ table {
 
 // START CUSTOMS
 
-.game_container{
+// Player Input Dialog Styles
+#dialogue-player-info{
+    border: .2rem solid var(--yellow-medium2);
+    background: var(--yellow-light);
+    border-radius: .2rem;
+}
+
+#dialogue-player-info::backdrop {
+    background-color: var(--yellow-medium2);
+}
+
+input{
+    background: none;
+    border: none;
+    border-bottom: .1rem solid var(--yellow-medium2);
+    padding: .2rem;
+    color: var(--yellow-medium2);
+    placeholder: var(--yellow-dark);
+}
+
+input:focus{
+    outline: .1rem solid var(--yellow-medium2);
+    background-color: var(--yellow-medium1);
+};
+
+select{
+    background: none;
+    border: none;
+    align-items: center;
+}
+
+
+// Gameboard
+#game_container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: var(--yellow-light);
+    // background-color: var(--yellow-light);
 }
 
 .page-heading {
@@ -91,7 +127,7 @@ table {
 }
 
 #message-span{
-    color:red;
+    color: var(--red-light);
 }
 
 .gameboard {
@@ -125,16 +161,16 @@ table {
     cursor: pointer;
 }
 .gameboard__cell:hover {
-    background-color: var(--yellow-dark);
+    background-color: var(--yellow-medium2);
 }
 
-#control-board{
+.control-board{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     padding: 1rem;
 }
 
-#reset-button{
+.btn {
     color: var(--yellow-dark2);
     // background-color: var(--yellow-medium2);
     padding: 0.3rem;
@@ -147,12 +183,20 @@ table {
     -webkit-backdrop-filter: blur( 7.5px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.1 );
-    
-
 };
 
-#reset-button:hover{
-    background-color: var(--yellow-dark2);
+#closeDialogButton{
+    background-color: var(--red-light);
+    color: var(--yellow-light);
+}
+#closeDialogButton:hover{
+    background-color: var(--red-medium);
+    color: var(--yellow-medium1);
+}
+
+.btn:hover{
+    cursor: pointer;
+    background: var(--yellow-dark2);
     color: var(--yellow-light)
 };
 
@@ -192,4 +236,11 @@ table {
 #wm_text {
     font-weight: var(--normal-font);
     font-size: .8rem;
+}
+
+#svg-bg{
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
 }
