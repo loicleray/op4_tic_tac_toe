@@ -197,6 +197,10 @@ const displayController = (() => {
     function updateAllDisplay() {
         updateBoardDisplay();
         updateMessageDisplay();
+        // reset classes of each cell in gameboard display
+        gameCells.forEach(element => {
+            element.className = "gameboard__cell";
+        });
     };
 
     // reset button functionality
@@ -222,35 +226,52 @@ const displayController = (() => {
         const p2Symbol = document.getElementById('p2-symbol').value
         const p2Name = document.getElementById('p2-name').value
 
-        console.log(p1Name, p1Symbol)
-
-
         person1 = Player(p1Name, p1Symbol);
         person2 = Player(p2Name, p2Symbol);
         gameInstance = GameLogic(person1, person2);
+        
+        gameBoard.resetBoard();
+        gameInstance.resetGameLogic();  
         updateAllDisplay();
         playerDialogDOM.close();
-        
     })
-
 
     // intitial render
     updateAllDisplay()
 
-        // game cell functionality (depending of if game isGameOver boolean)
-        gameCells.forEach(cell => cell.addEventListener('click', (e) => {
-            const cellIndex = e.target.getAttribute('data-game-cell-index');
-            if (gameInstance.getIsGameOver() == false) {
-                // e.target.classlist.add(`${gameInstance.getCurrentPlayer().getName}`)
-                // console.log(`Cell \'${cellIndex}\' clicked by \'${gameInstance.getCurrentPlayer().getName()}`)
-                gameInstance.makeMove(gameInstance.getCurrentPlayer(), cellIndex);
-                gameInstance.updateGameStatus();
-                updateAllDisplay();
-            };
-            if (gameInstance.getIsGameOver()) {
-                alert("Game has ended. Thanks for playing.")
-                // add css class to prevent hover color change of cells
-            };
-        }));
+    gameCells.forEach(cell => {
+        cell.addEventListener('click', handleClick);
+    });
+    
+    function handleClick(e) {
+        const cellIndex = Number(e.target.getAttribute('data-game-cell-index'));
+        
+        // Check if the game is not over
+        if (!gameInstance.getIsGameOver()) {
+            gameInstance.makeMove(gameInstance.getCurrentPlayer(), cellIndex);
+            gameInstance.updateGameStatus();
+            updateAllDisplay();
+        }
+    
+        // Check if the game is over and there is a winning combination
+        if (gameInstance.getIsGameOver()){
 
+            // preventhover effect
+            gameCells.forEach(cell => cell.classList.add("disabled"))
+
+            if (gameInstance.getWinningCombo()) {
+                const winningCombos = gameInstance.getWinningCombo();
+
+                gameCells.forEach((element, cellIndex) => {
+                    if (winningCombos.includes(cellIndex)) {
+                        element.classList.add("winning-position");
+                    } else {
+                        element.classList.add("losing-position");
+                    };
+                });
+            
+                
+        };
+        };
+    };
 })();

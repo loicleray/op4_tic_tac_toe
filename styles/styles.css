@@ -67,6 +67,7 @@ table {
   --red-light: rgb(226, 80, 80);
   --red-medium: rgb(203, 50, 50);
   --red-dark: rgb(127, 23, 23);
+  --red-light-opacity: rgb(245, 230, 160);
 }
 
 * {
@@ -91,12 +92,18 @@ input {
   border-bottom: 0.1rem solid var(--yellow-medium2);
   padding: 0.2rem;
   color: var(--yellow-medium2);
-  placeholder: var(--yellow-dark);
+}
+
+input::-moz-placeholder {
+  color: var(--yellow-medium2);
+}
+
+input::placeholder {
+  color: var(--yellow-medium2);
 }
 
 input:focus {
   outline: 0.1rem solid var(--yellow-medium2);
-  background-color: var(--yellow-medium1);
 }
 
 select {
@@ -155,6 +162,19 @@ select {
 
 .gameboard__cell:hover {
   background-color: var(--yellow-medium2);
+}
+
+.gameboard__cell.disabled {
+  /* Styles to apply when the cell is disabled */
+  pointer-events: none;
+}
+
+.winning-position {
+  background: var(--red-light-opacity);
+}
+
+.losing-position {
+  opacity: 0.5;
 }
 
 .control-board {
