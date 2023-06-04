@@ -149,17 +149,13 @@ function GameLogic(Player1, Player2) {
         };
 };
 
-
-// Create a couple of players
-
-const person1 = Player('Player 1', '🤞');
-const person2 = Player('Player 2', '👌');
-
 // Game Display IIFE
 const displayController = (() => {
-
+    // Create a couple of players
+    let person1 = Player('Player 1', '🤞');
+    let person2 = Player('Player 2', '👌');
     // make game instance
-    gameInstance = GameLogic(person1, person2);
+    let gameInstance = GameLogic(person1, person2);
 
     // DOM elements
     const messageSpanDOM = document.getElementById('message-span');
@@ -168,7 +164,8 @@ const displayController = (() => {
     // Elements in Dialog
     const playerDialogDOM = document.getElementById('dialogue-player-info')
     const closeDialogButtonDOM = document.getElementById('closeDialogButton')
-    const submitDialogButtonDOM = document.getElementById('submitDialogButton')
+    const submitDialogButtonDOM = document.getElementById('submitDialogButton');
+    const formContentsDOM = document.getElementById('form-players')
 
     const gameCells = document.querySelectorAll('.gameboard__cell');
 
@@ -183,7 +180,7 @@ const displayController = (() => {
     function updateMessageDisplay() {
         // update the current player
         if (gameInstance.getIsGameOver() == false) {
-            messageSpanDOM.innerHTML = gameInstance.getCurrentPlayer().getName();
+            messageSpanDOM.innerHTML = `${gameInstance.getCurrentPlayer().getName()}\'s turn!`;
         };
 
         if (gameInstance.getIsGameOver() == true){
@@ -216,6 +213,25 @@ const displayController = (() => {
     closeDialogButtonDOM.addEventListener("click", (e) => {
         playerDialogDOM.close()
     });
+
+    formContentsDOM.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const p1Symbol = document.getElementById('p1-symbol').value
+        const p1Name = document.getElementById('p1-name').value
+
+        const p2Symbol = document.getElementById('p2-symbol').value
+        const p2Name = document.getElementById('p2-name').value
+
+        console.log(p1Name, p1Symbol)
+
+
+        person1 = Player(p1Name, p1Symbol);
+        person2 = Player(p2Name, p2Symbol);
+        gameInstance = GameLogic(person1, person2);
+        updateAllDisplay();
+        playerDialogDOM.close();
+        
+    })
 
 
     // intitial render

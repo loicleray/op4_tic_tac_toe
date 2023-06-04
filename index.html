@@ -12,7 +12,7 @@
   <body>
     <!-- Dialogue -->
     <dialog id="dialogue-player-info">
-      <form id="form-player" action="#">
+      <form id="form-players" action="#">
         <fieldset class="fieldset-player-info">
           <label for="p1-symbol" hidden>Player 1 Symbol</label>
           <select name="player1-symbol" id="p1-symbol">
@@ -25,14 +25,15 @@
           <input
             type="text"
             name="player1-name"
+            id="p1-name"
             placeholder="Enter 1st name..."
             minlength="3"
             maxlength="15"
           />
         </fieldset>
         <fieldset class="fieldset-player-info">
-          <label for="p1-symbol" hidden>Player 1 Symbol</label>
-          <select name="player1-symbol" id="p1-symbol">
+          <label for="21-symbol" hidden>Player 2 Symbol</label>
+          <select name="player2-symbol" id="p2-symbol">
             <option value="⭕️">⭕️</option>
             <option value="👌">👌</option>
             <option value="○">○</option>
@@ -42,6 +43,7 @@
           <input
             type="text"
             name="player2-name"
+            id="p2-name"
             placeholder="Enter 2nd name..."
             minlength="3"
             maxlength="15"
